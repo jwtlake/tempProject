@@ -1,3 +1,5 @@
+//API Wrapper for Local USB Temp Sensor
+
 var util = require('util');
 var exec = require('child_process').exec;
 var child;
