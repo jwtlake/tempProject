@@ -9,10 +9,11 @@ var unixCommand = '../usb-thermometer-master/pcsensor';
 var tempSensor = function() {};
 
 // read temp sesnor
-tempSensor.prototype.read = function(sensorId) {
+tempSensor.prototype.read = function(reading) {
 	
-	var reading;
+	//var reading;
 	child = exec(unixCommand, function (error, stdout, stderr) {
+		var reading;
 		//sys.print('stdout: ' + stdout);
         	//sys.print('stderr: ' + stderr);
         	if (error !== null) {
