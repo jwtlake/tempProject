@@ -6,17 +6,13 @@ var geocoder = require('node-geocoder')('google', 'https', {apiKey: APIKeys.goog
 var tempSensorAPI = require('./temp_API.js');
 
 //Get Indoor Temp
-console.log('Reading Indoor TEMP Sensor(s)');
-
 var tempSensor = new tempSensorAPI();
-tempSensor.read(function(err, reading){
-  if(err) return console.log(err);
-  console.log(reading);
+tempSensor.read(function(reading){
+  	console.log('Reading Indoor TEMP Sensor(s)');
+	console.log(reading);
 });
 
 //Get Outdoor Temp
-console.log('Reading Outdoor TEMP');
-
 var forecast = new forecast({
                 service: 'forecast.io',
                 key: APIKeys.forcast,
@@ -37,6 +33,7 @@ geocoder.geocode(locations.home, function(err, res) {
 	//console.log(res[0].longitude);	
 	forecast.get([res[0].latitude, res[0].longitude], true, function(err, weather) {
 		if(err) return console.log(err);
+		console.log('Reading Outdoor TEMP');
 		console.log(weather.currently.temperature);
 	});
 });
