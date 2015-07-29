@@ -10,33 +10,46 @@ var tempSensorAPI = require('./temp_API.js');
 var tempSensor = new tempSensorAPI();
 var forecastService = new forecastAPI();
 
-// get outdoor temp
+// variables
+var updateInterval = 5; // in minutes
+var lastUpdated = '--';
 var outsideTemp = '--';
-forecastService.getReading(locations.home, false, function(reading){
-	outsideTemp = reading;	
-	console.log('Outside Temp: ' + reading + 'F');
-});
-
-// get indoor temp
 var insideTemp = '--';
-tempSensor.read(function(reading){
-	insideTemp = reading;
-	console.log('Inside Temp: ' + reading + 'F');
-});
+
+// get latest readings
+function getLatest(){
+	
+	// update time stamp
+	var datetime = new Date();
+	lastUpdated = datetime;
+	console.log('Getting latest readings');
+	
+	// get outdoor temp
+	forecastService.getReading(locations.home, false, function(reading){
+        	outsideTemp = reading;
+        	console.log('Outside Temp: ' + reading + 'F');
+	});
+
+	// get indoor temp
+	tempSensor.read(function(reading){
+        	insideTemp = reading;
+        	console.log('Inside Temp: ' + reading + 'F');
+	});
+};
+setInterval(getLatest, updateInterval * 60000); //get new readings every x minutes
 
 // create webserver
 var server = new Hapi.Server();
 server.connection({ 
-    host: 'localhost', 
-    port: 8080 
-});
+    port: 3000 
+}); // host: 'localhost', --removed because it wasnt working
 
 // route - current temps
 server.route({
     method: 'GET',
     path:'/current', 
     handler: function (request, reply) {
-       reply("<html><body><h1>Inside Temp:" + insideTemp + "F</h1><h1>Outside Temp:" + outsideTemp + "F</h1></body></html>");
+       reply("<html><body><h1>Inside Temp:" + insideTemp + "F</h1><h1>Outside Temp:" + outsideTemp + "F</h1><p>Last Updated:" + lastUpdated + "</p></body></html>");
     }
 });
 
