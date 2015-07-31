@@ -3,6 +3,7 @@ var locations = require('./locations.js');
 
 // libaries
 var Hapi = require('hapi');
+var ip = require('ip');
 var forecastAPI = require('./forecast_API.js');
 var tempSensorAPI = require('./temp_API.js');
 
@@ -22,7 +23,8 @@ function getLatest(){
 	// update time stamp
 	var datetime = new Date();
 	lastUpdated = datetime;
-	console.log('Getting latest readings');
+	console.log('Getting Current Temperature...');
+	console.log('Refresh Interval: [' + updateInterval  + '] Minutes');
 	
 	// get outdoor temp
 	forecastService.getReading(locations.home, false, function(reading){
@@ -36,12 +38,14 @@ function getLatest(){
         	console.log('Inside Temp: ' + reading + 'F');
 	});
 };
+getLatest(); //get first reading
 setInterval(getLatest, updateInterval * 60000); //get new readings every x minutes
 
 // create webserver
+var port = 3000
 var server = new Hapi.Server();
 server.connection({ 
-    port: 3000 
+    port: port 
 }); // host: 'localhost', --removed because it wasnt working
 
 // route - current temps
@@ -62,8 +66,6 @@ server.route({
     }
 });
 
-
-
 // start the server
 server.start();
-console.log('Webserver Started @192.168.0.102:3000 Listening...');
+console.log('Webserver Started @' + ip.address() + ':' + port + ' Listening...');
