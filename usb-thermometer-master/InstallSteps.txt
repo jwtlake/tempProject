@@ -1,0 +1,10 @@
+//modified steps from source: http://lee.smallbone.com/2014/10/using-temper1f-usb-temperature-probe-on-raspberry-pi/
+
+// get supporting libaries
+apt-get install build-essential libusb-dev
+
+//from usb-thermometer-master folder
+sudo make rules-install
+
+//unplug and re-plug temp sensor
+//sensor can now be used
