@@ -6,6 +6,7 @@
   "dependencies": {
     "forecast": "~0.2.1",
     "hapi": "~8.8.0",
+    "ip": "^0.3.3",
     "node-geocoder": "~2.21.2",
     "pg": "^4.4.0"
   },
