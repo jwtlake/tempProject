@@ -1,0 +1,21 @@
+CREATE TABLE SourceType (
+    Id serial PRIMARY KEY,
+    Type varchar (50) NOT NULL
+);
+INSERT INTO SourceType (Type) values ('Local'),('External');
+
+
+CREATE TABLE Source (
+    Id serial PRIMARY KEY,
+    Name varchar (50) NOT NULL,
+    SourceTypeId serial REFERENCES SourceType(Id)
+);
+INSERT INTO Source (Name,SourceTypeId) values ('Living Room',1),('Bedroom',1),('Lake Oswego',2);
+
+CREATE TABLE Reading (
+    Id bigserial PRIMARY KEY,
+    Temperature decimal(5,2) NOT NULL,
+    SourceId serial REFERENCES Source(Id),
+    ReadingDateTime timestamp NOT NULL,
+    InsertDateTime timestamp DEFAULT CURRENT_TIMESTAMP
+);
