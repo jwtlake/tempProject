@@ -1,8 +1,10 @@
 // Constructor
-function Reading(Id, Temperature, SourceId, ReadingDateTime, InsertDateTime){
+function Reading(Id, Temperature, Name, SourceId, Key, ReadingDateTime, InsertDateTime){
 	this.Id = Id;
 	this.Temperature = Temperature;
+	this.Name = Name;
 	this.SourceId = SourceId;
+	this.Key = Key;
 	this.ReadingDateTime  = ReadingDateTime;
 	this.InsertDateTime = InsertDateTime;
 };

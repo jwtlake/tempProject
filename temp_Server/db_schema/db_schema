@@ -1,17 +1,25 @@
+DROP TABLE SourceType, Source, Reading;
+
+--Source type
 CREATE TABLE SourceType (
     Id serial PRIMARY KEY,
     Type varchar (50) NOT NULL
 );
+
 INSERT INTO SourceType (Type) values ('Local'),('External');
 
 
+--Source
 CREATE TABLE Source (
     Id serial PRIMARY KEY,
     Name varchar (50) NOT NULL,
-    SourceTypeId serial REFERENCES SourceType(Id)
+    SourceTypeId serial REFERENCES SourceType(Id),
+    ApiKey varchar (50) NOT NULL
 );
-INSERT INTO Source (Name,SourceTypeId) values ('Living Room',1),('Bedroom',1),('Lake Oswego',2);
 
+INSERT INTO Source (Name,SourceTypeId,ApiKey) values ('Living Room',1,'72f18b5f6f63b572e58c48d19c957b51'),('Bedroom',1,'72f18b5f6f63b572e58c48d19c957b52'),('Lake Oswego',2,'72f18b5f6f63b572e58c48d19c957b53');
+
+--Reading
 CREATE TABLE Reading (
     Id bigserial PRIMARY KEY,
     Temperature decimal(5,2) NOT NULL,

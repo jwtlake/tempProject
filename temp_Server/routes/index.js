@@ -37,21 +37,29 @@ function apiGET(request, reply) {
 	controller.getAllReadings(function(readings){
 		reply(readings);
 	});
-}
+};
 
 //post new reading
 function apiPOST(request, reply) {
-	var reading = new readingObject(null,request.payload.temp,1,request.payload.timestamp,null);
-	controller.newReading(reading);
+	var reading = new readingObject(
+		null,
+		request.payload.temp,
+		request.payload.name,
+		null,
+		request.payload.key,
+		request.payload.timestamp,
+		null);
+
+	//console.log(reading);
+	controller.authenticateReader(reading,function(verifiedReading){controller.newReading(verifiedReading)});
+	
 	reply(reading);
 //	console.log(reading);
-}
+};
+
 
 //export routes
 module.exports = Routes;
-
-
-//example 
 
 
 
