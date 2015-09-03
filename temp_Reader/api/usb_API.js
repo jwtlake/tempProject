@@ -11,7 +11,7 @@ var unixCommand = '../usb-thermometer-master/pcsensor';
 var tempSensor = function() {};
 
 // read temp sesnor
-tempSensor.prototype.read = function(callback) {
+tempSensor.prototype.getReading = function(callback) {
 	
 	//var reading;
 	child = exec(unixCommand, function (error, stdout, stderr) {

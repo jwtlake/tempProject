@@ -4,11 +4,12 @@
   "description": "Home automation project to monitor, log, and send alerts using temperature sensors.",
   "main": "index.js",
   "dependencies": {
-    "forecast": "^0.2.1",
-    "hapi": "^8.8.1",
+    "forecast": "~0.2.1",
+    "hapi": "~8.8.0",
     "ip": "^0.3.3",
-    "node-geocoder": "^2.21.2",
-    "pg": "^4.4.1"
+    "node-geocoder": "~2.21.2",
+    "pg": "^4.4.0",
+    "request": "^2.61.0"
   },
   "devDependencies": {},
   "scripts": {

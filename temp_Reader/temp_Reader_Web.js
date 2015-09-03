@@ -1,11 +1,11 @@
 // private info
-var locations = require('./locations.js');
+var locations = require('./settings/locations.js');
 
 // libaries
 var Hapi = require('hapi');
 var ip = require('ip');
-var forecastAPI = require('./forecast_API.js');
-var tempSensorAPI = require('./temp_API.js');
+var forecastAPI = require('./api/forecast_API.js');
+var tempSensorAPI = require('./api/usb_API.js');
 
 // instantiate temp objects
 var tempSensor = new tempSensorAPI();
@@ -33,7 +33,7 @@ function getLatest(){
 	});
 
 	// get indoor temp
-	tempSensor.read(function(reading){
+	tempSensor.getReading(function(reading){
         	insideTemp = reading;
         	console.log('Inside Temp: ' + reading + 'F');
 	});

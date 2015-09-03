@@ -1,6 +1,6 @@
 // API Wrapper for External Temp service Forcast.io
 
-var APIKeys = require('./APIKeys'); // private info
+var APIKeys = require('../settings/APIKeys'); // private info
 
 // libaries
 var geocoder = require('node-geocoder')('google', 'https', {apiKey: APIKeys.google, formatter: null});
