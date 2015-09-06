@@ -121,5 +121,36 @@ readingController.prototype.getAllReadings = function(callback) {
         });
 };
 
+// get current readings
+readingController.prototype.getCurrentReadings = function(callback) {
+	
+	var selectCurrentQuery = 'SELECT DISTINCT ON (S.Id) S.Name,ST.Type,R.Temperature,R.ReadingDateTime FROM Reading AS R JOIN Source AS S ON S.Id = R.SourceId JOIN SourceType AS ST ON ST.Id = S.SourceTypeId ORDER BY S.Id, R.ReadingDateTime DESC;';
+
+	//debug
+        //console.log(selectQuery);
+
+	 //connect
+        pg.connect(this.conString, function(err, client, done) {
+                //check for error
+                if(err) {
+                        return callback(err);
+                        //console.error('error fetching client from pool', err);
+                } else {
+                        //select
+                        var readings = [];
+                        var query = client.query(selectCurrentQuery);
+                        query.on('row', function(row) {
+                                //console.log(row);
+                                readings.push(row);
+                        });
+                        query.on('end', function() {
+                                client.end();
+                                return callback(readings);
+                        });
+
+                }
+        });
+};
+
 // export
 module.exports = readingController;

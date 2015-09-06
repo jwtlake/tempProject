@@ -1,4 +1,5 @@
 //routes
+//why dont i have to pass paramaters for handler functions?
 var Routes = [{
 	path: '/',
 	method: 'GET',
@@ -9,10 +10,7 @@ var Routes = [{
 {
         path: '/temp/current',
         method: 'GET',
-        handler: function (request, reply){
-                reply('current temp.');
-                console.log('current temp');
-        }
+        handler: getCurrent
 },
 {
 	path: '/temp/api',
@@ -25,6 +23,8 @@ var Routes = [{
         handler: apiPOST
 }];
 
+
+//think these might be handlers
 //not sure where to put this
 var readingController = require('../controllers/readingController.js');
 var readingObject = require('../objects/readingObject.js');
@@ -56,6 +56,17 @@ function apiPOST(request, reply) {
 	reply(reading);
 //	console.log(reading);
 };
+
+//get current temps
+function getCurrent(request, reply) {
+
+	//reply('get');
+        //console.log('get');
+        controller.getCurrentReadings(function(readings){
+                reply(readings);
+        });
+};
+
 
 
 //export routes
