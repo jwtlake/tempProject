@@ -1,9 +1,11 @@
 var Hapi = require('hapi');
-var ip = require('ip'); 
+var ip = require('ip');
 
-//create new server object
+// Create new server object and pass in some options to
+// log errors when a 500 happens
 var port = 3000;
-var server = new Hapi.Server();
+var server = new Hapi.Server({ debug: { request: ['error'] } });
+
 server.connection({
     port: port
 });
