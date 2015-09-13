@@ -1,5 +1,9 @@
-//routes
-//why dont i have to pass paramaters for handler functions?
+// routes
+// why dont i have to pass paramaters for handler functions?
+//
+// jondlm: Because javascript will auto pass the parameters for you when you
+// write the name of a function with the parentheses
+
 var Routes = [{
 	path: '/',
 	method: 'GET',
@@ -52,7 +56,7 @@ function apiPOST(request, reply) {
 
 	//console.log(reading);
 	controller.authenticateReader(reading,function(verifiedReading){controller.newReading(verifiedReading)});
-	
+
 	reply(reading);
 //	console.log(reading);
 };
