@@ -1,7 +1,7 @@
 #Deperacted
 Project is being rewriten with better design patterns at:
 * https://github.com/jwtlake/thermal-server
-* https://github.com/jwtlake/thermal-client
+* https://github.com/jwtlake/thermal-sensor
 
 ##Changes
 * Client/Server will be broken into two projects 
